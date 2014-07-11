@@ -50,8 +50,8 @@ func NewContext(config Config) *ConfiguredContext {
 		organizationName: fmt.Sprintf("CATS-ORG-%d-%s", node, timeTag),
 		spaceName:        fmt.Sprintf("CATS-SPACE-%d-%s", node, timeTag),
 
-		regularUserUsername: fmt.Sprintf("CATS-USER-%d-%s", node, timeTag),
-		regularUserPassword: "meow",
+		regularUserUsername: "cf_tester",
+		regularUserPassword: "DudePassword10",
 
 		isPersistent: false,
 	}
@@ -93,11 +93,11 @@ func (context *ConfiguredContext) Setup() {
 
 		Expect(cf.Cf(args...).Wait(CF_API_TIMEOUT)).To(Exit(0))
 
-		createUserSession := cf.Cf("create-user", context.regularUserUsername, context.regularUserPassword)
-		createUserSession.Wait(CF_API_TIMEOUT)
-		if createUserSession.ExitCode() != 0 {
-			Expect(createUserSession.Out).To(Say("scim_resource_already_exists"))
-		}
+//		createUserSession := cf.Cf("create-user", context.regularUserUsername, context.regularUserPassword)
+//		createUserSession.Wait(CF_API_TIMEOUT)
+//		if createUserSession.ExitCode() != 0 {
+//			Expect(createUserSession.Out).To(Say("scim_resource_already_exists"))
+//		}
 
 		Expect(cf.Cf("create-org", context.organizationName).Wait(CF_API_TIMEOUT)).To(Exit(0))
 		Expect(cf.Cf("set-quota", context.organizationName, definition.Name).Wait(CF_API_TIMEOUT)).To(Exit(0))
@@ -106,7 +106,7 @@ func (context *ConfiguredContext) Setup() {
 
 func (context *ConfiguredContext) Teardown() {
 	cf.AsUser(context.AdminUserContext(), func() {
-		Expect(cf.Cf("delete-user", "-f", context.regularUserUsername).Wait(CF_API_TIMEOUT)).To(Exit(0))
+//		Expect(cf.Cf("delete-user", "-f", context.regularUserUsername).Wait(CF_API_TIMEOUT)).To(Exit(0))
 
 		if !context.isPersistent {
 			Expect(cf.Cf("delete-org", "-f", context.organizationName).Wait(CF_API_TIMEOUT)).To(Exit(0))

@@ -14,7 +14,7 @@ const CURL_TIMEOUT = 10 * time.Second
 // Gets an app's endpoint with the specified path
 func AppUri(appName, path string) string {
 	appsDomain := LoadConfig().AppsDomain
-	return "http://" + appName + "." + appsDomain + path
+	return "https://" + appName + "." + appsDomain + path
 }
 
 // Gets an app's root endpoint
