@@ -32,7 +32,7 @@ var _ = Describe("Oracle Service Tests", func() {
 		helpers.TestAndCleanupService(instanceName, DEFAULT_TIMEOUT)
 	})
 	
-	It("successfully create and bind a test service", func() {
+	It("successfully create and bind a prod service", func() {
 		instanceName := "oracle-service-prod"
 
 		service := cf.Cf("create-oracle-service", instanceName, "Prod Oracle 11g").Wait(DEFAULT_TIMEOUT)
