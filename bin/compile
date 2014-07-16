@@ -12,3 +12,6 @@ go test -v -c ./services/
 rm services.test
 echo "Compiling helpers"
 go build -v ./...
+echo "Compiling LDS"
+go build -v ./lds/
+rm lds.test
