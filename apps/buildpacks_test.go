@@ -37,19 +37,19 @@ var _ = Describe("Buildpacks", func() {
 		})
 	})
 
-	Describe("go", func() {
-		It("makes the app reachable via its bound route", func() {
-			Expect(cf.Cf("push", appName, "-p", helpers.NewAssets().Go).Wait(CF_PUSH_TIMEOUT)).To(Exit(0))
+//	Describe("go", func() {
+//		It("makes the app reachable via its bound route", func() {
+//			Expect(cf.Cf("push", appName, "-p", helpers.NewAssets().Go).Wait(CF_PUSH_TIMEOUT)).To(Exit(0))
+//
+//			Expect(helpers.CurlAppRoot(appName)).To(ContainSubstring("go, world"))
+//		})
+//	})
 
-			Expect(helpers.CurlAppRoot(appName)).To(ContainSubstring("go, world"))
-		})
-	})
-
-	Describe("python", func() {
-		It("makes the app reachable via its bound route", func() {
-			Expect(cf.Cf("push", appName, "-p", helpers.NewAssets().Python).Wait(CF_PUSH_TIMEOUT)).To(Exit(0))
-
-			Expect(helpers.CurlAppRoot(appName)).To(ContainSubstring("python, world"))
-		})
-	})
+//	Describe("python", func() {
+//		It("makes the app reachable via its bound route", func() {
+//			Expect(cf.Cf("push", appName, "-p", helpers.NewAssets().Python).Wait(CF_PUSH_TIMEOUT)).To(Exit(0))
+//
+//			Expect(helpers.CurlAppRoot(appName)).To(ContainSubstring("python, world"))
+//		})
+//	})
 })
